@@ -1,5 +1,5 @@
-package com.example.springassignment1;
-import org.springframework.web.bind.annotation.DeleteMapping;
+package com.group11.springassignment1;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
  import java.util.List;
