@@ -1,12 +1,13 @@
 package com.example.springassignment1;
 import org.jetbrains.annotations.NotNull;
 
+
 public class Courses {
 
-    @NotNull(message = "course name cannot be empty")
+    @NotNull
     private String name;
 
-    @NotNull(message = "course description cannot be empty")
+    @NotNull
     private String description;
 
     public Courses(String name, String description){
