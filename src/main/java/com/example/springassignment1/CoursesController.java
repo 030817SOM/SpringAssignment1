@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+
 @RestController
 public class CoursesController {
     @Autowired
@@ -20,13 +21,13 @@ public class CoursesController {
         return courseService.getAllCourses();
     }
 
-    @GetMapping("/course/{courseid}")
-    private Courses getCourses(@PathVariable("courseid") int courseid) {
-        return courseService.getCoursesbyid(courseid);
+    @GetMapping("/courses/{coursesId}")
+    private Courses getCourses(@PathVariable("coursesid") int courseid) {
+        return courseService.getCoursesById(courseid);
     }
 
     @DeleteMapping("/course/{courseid}")
-    private void deleteCourse(@PathVariable(courseid) int courseid) {
+    private void deleteCourse(@PathVariable("courseid") int courseid) {
         courseService.delete(courseid);
     }
 
