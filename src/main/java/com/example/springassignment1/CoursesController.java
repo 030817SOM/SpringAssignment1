@@ -1,61 +1,46 @@
 package com.example.springassignment1;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("/courses")
-public class CourseController {
-
+public class CoursesController {
     @Autowired
-    private CourseService courseService;
+    CourseService courseService;
 
-    // Correcting the return type to List<Course> instead of List<CourseService>
-    @GetMapping
-    public ResponseEntity<List<Course>> getCourses() {
-        return new ResponseEntity<>(courseService.getAllCourses(), HttpStatus.OK);
+    @GetMapping("/Courses")
+    private List<Courses> getAllCourses() {
+        return courseService.getAllCourses();
     }
 
-    @GetMapping("/{name}")
-    public HttpEntity<Course> getCourse(@PathVariable String name) {
-        List<Course> courses=courseService.getCoursebyName(name).collect(Collectors.toList());
-        if (courses.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(courses.get(0),HttpStatus.OK);
+    @GetMapping("/course/{courseid}")
+    private Courses getCourses(@PathVariable("courseid") int courseid) {
+        return courseService.getCoursesbyid(courseid);
     }
 
-    @PostMapping
-    public ResponseEntity<String> addCourse(@RequestBody @Valid Course course) {
-        courseService.addCourse(course);
-        return new ResponseEntity<>("Course added successfully", HttpStatus.CREATED);
+    @DeleteMapping("/course/{courseid}")
+    private void deleteCourse(@PathVariable(courseid) int courseid) {
+        courseService.delete(courseid);
     }
 
-    @PutMapping("/{name}")
-    public ResponseEntity<String> updateCourse(@PathVariable String name, @RequestBody @Valid Course course) {
-        boolean updated = courseService.updateCourse(name, course);
-        return updated ?
-                new ResponseEntity<>("Course updated successfully", HttpStatus.OK) :
-                new ResponseEntity<>("Course not found", HttpStatus.NOT_FOUND);
+    @PostMapping("/course")
+    private int saveCourse(@RequestBody Courses courses) {
+        courseService.saveOrUpdate(courses);
+        return courses.getCourseid();
     }
 
-    @DeleteMapping("/{name}")
-    public ResponseEntity<String> deleteCourse(@PathVariable String name) {
-        boolean deleted = courseService.deleteCourse(name);
-        return deleted ?
-                new ResponseEntity<>("Course deleted successfully", HttpStatus.OK) :
-                new ResponseEntity<>("Course not found", HttpStatus.NOT_FOUND);
-    }
-
-    public void setDescription(Object description) {
-
+    @PutMapping
+    private Courses update(@RequestBody Courses courses) {
+        courseService.saveOrUpdate(courses);
+        return courses;
     }
 }
+
+

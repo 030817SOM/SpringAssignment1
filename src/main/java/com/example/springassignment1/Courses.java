@@ -1,30 +1,31 @@
 package com.example.springassignment1;
-import org.jetbrains.annotations.NotNull;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.id;
+import javax.persistence.Table;
 
-
+@Entity
+@Table
 public class Courses {
+    @id
+    @Column
+    private int courseid;
+    @Column
+    private String coursename;
+    @Column
 
-    @NotNull
-    private String name;
-
-    @NotNull
-    private String description;
-
-    public Courses(String name, String description){
-        this.name = name;
-        this.description = description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public void setName(String name) {
-        this.name = name;
+    public int getCourseid(){
+        return courseid;
     }
 
-    public String getName() {
-        return name;
+    public void setCourseid(int courseid) {
+        this.courseid = courseid;
+    }
+    public String getCoursename(){
+        return coursename;
+    }
+
+    public void setCoursename(String coursename) {
+        this.coursename = coursename;
     }
 }

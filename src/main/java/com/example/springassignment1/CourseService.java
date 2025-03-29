@@ -1,43 +1,34 @@
 package com.example.springassignment1;
 
+import com.example.springassignment1.Repository.CoursesRepository;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.example.CourseController;
+
 
 @Service
 public class CourseService {
-    private final List<Course>courses = new ArrayList<>();
-    private final CourseController course;
+    @Autowired
+    CoursesRepository courseRepository;
 
-    public CourseService(CourseController course) {
-        this.course = course;
-    }
-
-    public List<Course> getAllCourses() {
+    public List<Courses> getAllCourses() {
+        List<Courses> courses = new ArrayList<Courses>();
+        courseRepository.findAll().forEach(courses1 -> courses.add(courses1));
         return courses;
     }
 
-    public Stream<Course> getCoursebyName(String name){
-        return courses.stream().filter( course -> course.getName().equals(name));
+    public Courses getCoursesbyid(int id) {
+        return courseRepository.findbyid(id).get();
     }
 
-
-    public  void addCourse(Course course){
-        courses.add(course);
-    }
-
-    public  boolean updateCourse(String name, Course updatedCourse){
-        Stream<Course> existingCourse = getCoursebyName(name);
-          return existingCourse.findFirst().map(course -> ){
-            Course.set(updatedCourse.getName);
-            course.setDescription(updatedCourse.getDescription());
-            return true;
-        }
-        return false;
-    }
-    public boolean deleteCourse(String name) {
-        return courses.removeIf(course ->courses.getName().equals(name));
+    public void delete(int id) {
+        courseRepository.save(courses);
     }
 }
+
+
 
