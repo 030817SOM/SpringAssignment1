@@ -9,9 +9,12 @@ import java.util.List;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
+@RequestMapping("/courses")
 public class CoursesController {
     @Autowired
     CourseService courseService;
@@ -22,23 +25,23 @@ public class CoursesController {
     }
 
     @GetMapping("/courses/{coursesId}")
-    private Courses getCourses(@PathVariable("coursesid") int courseid) {
-        return courseService.getCoursesById(courseid);
+    private Courses getCourses(@PathVariable("coursesId") int coursesId) {
+        return courseService.getCoursesById(coursesId);
     }
 
-    @DeleteMapping("/course/{courseid}")
-    private void deleteCourse(@PathVariable("courseid") int courseid) {
-        courseService.delete(courseid);
+    @DeleteMapping("/course/{coursesId}")
+    private void deleteCourse(@PathVariable("coursesId") int coursesId) {
+        courseService.delete(coursesId);
     }
 
     @PostMapping("/course")
-    private int saveCourse(@RequestBody Courses courses) {
+    private int saveCourse(@Valid @RequestBody Courses courses) {
         courseService.saveOrUpdate(courses);
         return courses.getCourseid();
     }
 
     @PutMapping
-    private Courses update(@RequestBody Courses courses) {
+    private Courses update(@Valid @RequestBody Courses courses) {
         courseService.saveOrUpdate(courses);
         return courses;
     }
