@@ -1,38 +1,48 @@
-package com.example.springassignment1;
+package com.example.springassignment1.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 
-
-@Entity
-@Table
 public class Courses {
 
     @Size(min = 1,max = 5,message = "course id cannot be more than 5")
     @NotBlank(message = "course id connot be blank")
-    @Column
-    private int courseid;
+    private Long courseid;
 
-    @Column
     @NotBlank(message = "Course name cannot be blank")
     @Size(min = 3,max = 100,message = "Course name must at least between 3 and 100 characters")
     private String coursename;
 
-    @Column
+
     @Size(min = 5,message = "Description must have at least 5 characters")
     @NotBlank(message = "Description cannot be blank")
     private String description;
 
-    public int getCourseid(){
+    @NotBlank(message = "course description")
+    private String coursedetails;
+
+    public Courses(Long courseid, String coursename,String description,String coursedetails){
+        this.courseid = courseid;
+        this.coursedetails = coursedetails;
+        this.coursename = coursename;
+        this.description = description;
+    }
+
+    public String getCoursedetails() {
+        return coursedetails;
+    }
+
+    public void setCoursedetails(String coursedetails) {
+        this.coursedetails = coursedetails;
+    }
+
+    public Long getCourseid(){
         return courseid;
     }
 
-    public void setCourseid(int courseid) {
+    public void setCourseid(Long courseid) {
         this.courseid = courseid;
     }
     public String getCoursename(){
