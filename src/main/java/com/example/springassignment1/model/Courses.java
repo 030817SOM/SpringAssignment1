@@ -2,7 +2,6 @@ package com.example.springassignment1.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import javax.persistence.Entity;
 
 
 public class Courses {
@@ -23,7 +22,7 @@ public class Courses {
     @NotBlank(message = "course description")
     private String coursedetails;
 
-    public Courses(Long courseid, String coursename,String description,String coursedetails){
+    public Courses(){
         this.courseid = courseid;
         this.coursedetails = coursedetails;
         this.coursename = coursename;

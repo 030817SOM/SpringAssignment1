@@ -31,7 +31,7 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-     @GetMapping
+     @GetMapping("/")
      private List<Courses> getAllCourses() {
          return courseService.getAllCourses();
      }
@@ -42,7 +42,7 @@ public class CourseController {
          return courses.map(ResponseEntity::ok)
          .orElseThrow(() -> new RuntimeException("course not found "+ id));
      }
-     @PostMapping
+     @PostMapping("/")
      @ResponseStatus(HttpStatus.CREATED)
      public Courses createCourses(@Valid @RequestBody Courses course, BindingResult bindingResult) {
          if (bindingResult.hasErrors()) {
@@ -51,7 +51,7 @@ public class CourseController {
          return courseService.createCourses(course);
      }
 
-     @PutMapping
+     @PutMapping("/{id}")
      public ResponseEntity<Courses> updateCourses( @PathVariable("id") Long id, @Valid @RequestBody Courses courses, BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             throw new RuntimeException("invalid input data "+ bindingResult.getAllErrors());
