@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 
  @RestController
- @RequestMapping("/Courses")
+ @RequestMapping("/courses")
 public class CourseController {
 
     private final CourseService courseService;
@@ -31,9 +31,9 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-     @GetMapping("/")
+     @GetMapping
      private List<Courses> getAllCourses() {
-         return courseService.getAllCourses();
+        return courseService.getAllCourses();
      }
 
      @GetMapping("/{id}")
@@ -42,7 +42,7 @@ public class CourseController {
          return courses.map(ResponseEntity::ok)
          .orElseThrow(() -> new RuntimeException("course not found "+ id));
      }
-     @PostMapping("/")
+     @PostMapping("/add")
      @ResponseStatus(HttpStatus.CREATED)
      public Courses createCourses(@Valid @RequestBody Courses course, BindingResult bindingResult) {
          if (bindingResult.hasErrors()) {

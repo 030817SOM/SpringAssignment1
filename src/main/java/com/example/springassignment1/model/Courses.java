@@ -22,41 +22,43 @@ public class Courses {
     @NotBlank(message = "course description")
     private String coursedetails;
 
-    public Courses(){
-        this.courseid = courseid;
-        this.coursedetails = coursedetails;
-        this.coursename = coursename;
-        this.description = description;
-    }
 
     public String getCoursedetails() {
+
         return coursedetails;
     }
 
     public void setCoursedetails(String coursedetails) {
+
         this.coursedetails = coursedetails;
     }
 
     public Long getCourseid(){
+
         return courseid;
     }
 
     public void setCourseid(Long courseid) {
+
         this.courseid = courseid;
     }
     public String getCoursename(){
+
         return coursename;
     }
 
     public void setCoursename(String coursename) {
+
         this.coursename = coursename;
     }
 
     public String getDescription() {
+
         return description;
     }
 
     public void setDescription(String description) {
+
         this.description = description;
     }
 }

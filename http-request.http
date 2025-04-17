@@ -1,0 +1,16 @@
+###
+POST http://localhost:8080/Courses
+Content-Type: application/json
+
+###
+POST http://localhost:8080/Courses/Courses/add
+Content-Type: application/json
+
+{
+  "courseid": 2,
+  "coursename": "Advanced programming",
+  "description": "learning C++",
+  "coursedetails": "Undergraduate"
+}
+
+###
